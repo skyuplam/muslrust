@@ -5,10 +5,10 @@ docker_build() {
   # NB: add -vv to cargo build when debugging
   local -r crate="$1"crate
   docker run --rm \
-    -v "$PWD/test/${crate}:/volume" \
-    -v cargo-cache:/root/.cargo \
+    -v "$PWD/test/${crate}:/home/rust" \
+    -v "$PWD/cargo-cache:/usr/local/cargo/registry" \
     -e RUST_BACKTRACE=1 \
-    -it clux/muslrust \
+    -it skyuplam/muslrust:latest \
     cargo build
   cd "test/${crate}"
   ./target/x86_64-unknown-linux-musl/debug/"${crate}"
