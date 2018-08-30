@@ -1,5 +1,5 @@
 FROM debian:stretch
-MAINTAINER Eirik Albrigtsen <sszynrae@gmail.com>
+MAINTAINER Terrence Lam <skyuplam@gmail.com>
 
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
