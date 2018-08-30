@@ -72,7 +72,7 @@ RUN curl -sS -o zlib-$ZLIB_VER.tar.gz http://zlib.net/zlib-$ZLIB_VER.tar.gz && \
     cd .. && rm -rf zlib-$ZLIB_VER*
 
 # Build arg to control openssl version
-ARG SSL_VER=1.1.0g
+ARG SSL_VER=1.1.0i
 # Build openssl (used in curl and pq)
 RUN curl -sS -o openssl-$SSL_VER.tar.gz \
       https://www.openssl.org/source/openssl-$SSL_VER.tar.gz && \
@@ -87,7 +87,7 @@ RUN curl -sS -o openssl-$SSL_VER.tar.gz \
     make -j$(nproc) && make install && \
     cd .. && rm -rf openssl-$SSL_VER*
 
-ARG CURL_VER=7.58.0
+ARG CURL_VER=7.61.0
 # Build curl (needs with-zlib and all this stuff to allow https)
 # curl_LDFLAGS needed on stretch to avoid fPIC errors - though not sure from what
 RUN curl -sSL https://curl.haxx.se/download/curl-$CURL_VER.tar.gz | tar xz && \
@@ -102,7 +102,7 @@ RUN curl -sSL https://curl.haxx.se/download/curl-$CURL_VER.tar.gz | tar xz && \
     cd .. && rm -rf curl-$CURL_VER
 
 # Build arg to control libpq version
-ARG PQ_VER=10.3
+ARG PQ_VER=10.5
 # Build libpq
 RUN curl -sS -o postgresql-$PQ_VER.tar.gz \
       https://ftp.postgresql.org/pub/source/v$PQ_VER/postgresql-$PQ_VER.tar.gz && \
@@ -122,8 +122,8 @@ RUN curl -sS -o postgresql-$PQ_VER.tar.gz \
 
 
 # Build arg to control sqlite version and checksum
-ARG SQLITE_VER=3220000
-ARG SQLITE_SHA1CHECKSUM=2fb24ec12001926d5209d2da90d252b9825366ac
+ARG SQLITE_VER=3240000
+ARG SQLITE_SHA1CHECKSUM=da68915e3563b5244cbcdb6c7e20fb35559bcfc6
 # Build libsqlite3 using same configuration as the alpine linux main/sqlite package
 RUN curl -sS -o sqlite-autoconf-$SQLITE_VER.tar.gz \
       https://www.sqlite.org/2018/sqlite-autoconf-$SQLITE_VER.tar.gz && \
