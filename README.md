@@ -17,8 +17,8 @@ If you already have [rustup](https://www.rustup.rs/) installed on the machine th
 Pull and run from a rust project root:
 
 ```sh
-docker pull clux/muslrust
-docker run -v $PWD:/volume -t clux/muslrust cargo build
+docker pull skyuplam/muslrust
+docker run -v $PWD:/volume -t skyuplam/muslrust cargo build
 ```
 
 You should have a static executable in the target folder:
@@ -28,10 +28,10 @@ ldd target/x86_64-unknown-linux-musl/debug/EXECUTABLE
         not a dynamic executable
 ```
 
-From there on, you can include it in a blank docker image (because everything you need is included in the binary) and perhaps end up with a [5MB docker blog image](https://github.com/clux/blog).
+From there on, you can include it in a blank docker image (because everything you need is included in the binary) and perhaps end up with a [5MB docker blog image](https://github.com/skyuplam/blog).
 
 ## Docker builds
-Latest is always the last built nightly pushed by travis. To pin against specific builds, see the [available tags](https://hub.docker.com/r/clux/muslrust/tags/) on the docker hub.
+Latest is always the last built nightly pushed by travis. To pin against specific builds, see the [available tags](https://hub.docker.com/r/skyuplam/muslrust/tags/) on the docker hub.
 
 ## C Libraries
 The following system libraries are compiled against `musl-gcc`:
@@ -52,7 +52,7 @@ If you need extra dependencies, you can follow the builder pattern approach by [
 Clone, tweak, build, and run tests:
 
 ```sh
-git clone git@github.com:clux/muslrust.git && cd muslrust
+git clone git@github.com:skyuplam/muslrust.git && cd muslrust
 make build
 make test
 ```
@@ -66,7 +66,6 @@ Before we push a new version of muslrust we ensure that we can use and staticall
 - [x] `openssl`
 - [x] `flate2`
 - [x] `rand`
-- [ ] `rocket` (nightly only - [occasionally breaks](https://github.com/clux/muslrust/issues/32))
 
 ## SSL Verification
 You need to point openssl at the location of your certificates explicitly to have https requests not return certificate errors.
@@ -95,7 +94,7 @@ musl-build() {
   docker run \
     -v cargo-cache:/root/.cargo \
     -v "$PWD:/volume" \
-    --rm -it clux/muslrust cargo build --release
+    --rm -it skyuplam/muslrust cargo build --release
 }
 ```
 
